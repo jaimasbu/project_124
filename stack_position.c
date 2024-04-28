@@ -7,10 +7,34 @@
 static position stack[MAX];
 static int top=-1;
 
-//clear
-void clear (){
-	top = 0;
+//mark ??
+void mark(){
+	stack.x = '+';
+	stack.y= '+';
 }
+
+//move_f
+void MOVE_F(){
+	push(stack.x + 1);
+}
+
+//move_b
+void MOVE_B{
+	push(stack.x - 1);	
+}
+
+//move_l
+void MOVE_L
+{
+	push(stack.y + 1);	
+}
+
+//move_r
+void MOVE_R
+{
+	push(stack.y - 1);	
+}
+
 
 
 //full
@@ -28,18 +52,44 @@ int is_empty(){
 }
 
 // push (add or mark it)
-void push (int a)
+void push (int x, int y)
 {
 	if(!is_full()) {
-		stack[top] = a;
+		stack.x[top] = x;
+		stack.y[top] = y;
 		top++;
 	}
+	
 	else {
-		print("Already marked")
+		print("memory full");
 	}
 }
-//mark
-void mark(){
-	
+
+
+//pop
+void pop(){
+	if(!is_empty()){
+		stack--; 
+	}
+	exit(1);
 }
+
+//peek
+int peek(){
+	if(!is_empty()){
+		return stack[top-1];
+	}
+}
+
+//clear
+void clear (){
+	top = 0;
+}
+
+
+
+
+
+
+
 

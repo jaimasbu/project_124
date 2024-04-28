@@ -1,4 +1,3 @@
-//queue.h
 
 typedef struct {
 	int x;
