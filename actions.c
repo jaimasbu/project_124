@@ -1,16 +1,19 @@
-//stack.c
+// actions.c
 
 #include <stdio.h>
-#include "queue.h"
+#include <stdlib.h>
+#include "project.h"
+
 #define MAX 100
 
-static position stack[MAX];
-static int top=-1;
+static position current;
+
+// create switch statement later, meaning we only need one function, also current position doesn't need to be a stack
 
 //mark ??
 void mark(){
-	stack.x = '+';
-	stack.y= '+';
+	current.x = '+';
+	current.y= '+';
 }
 
 //move_f

@@ -1,42 +1,71 @@
 //main.c
 
-#include <studio.h>
-#include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "project.h"
 
 #define MAX 100
-
 
 int main () {
 	
 	// initialize files, variables, arrays
-	FILE *maze_f;
+	FILE *maze_f, *intel_f, *outp_f;
 	char maze[MAX][MAX];
 	char ch;
-	int i, j;
+	int i, j, nrrows = 0, nrcols = 0;
 	
-	// open input file
+	// open files
 	if((maze_f = fopen("maze.txt", "r")) == NULL) {
-		printf("Maze.txt cannot be opened.");
+		printf("maze.txt cannot be opened.");
 		exit (1);
 	}
 	
-	// scan from input file to maze array
-	while((ch=fgetc(maze_f))!=EOF){  //not end of file
-		if(i == MAX){ //8 rows max
-			i = 0; //reset when row 8 for column i is hit
-			j++; //next column for each row
-		}
-		maze[i][j] = ch; 
-		i++; //goes down the row for the same column
+	/*if((intel_f = fopen("intel.txt", "r")) == NULL) {
+		printf("intel.txt cannot be opened.");
+		exit (1);
+	}*/
+	
+	if((outp_f = fopen("output.txt", "w")) == NULL) {
+		printf("output.txt cannot be opened.");
+		exit (1);
+	}
+
+	// scan start and end positions from input file
+
+	// get dimensions of maze
+	while((ch = fgetc(maze_f)) != EOF) {
+		if(nrrows == 0 && ch != '\n')		// counts number of characters in first row
+			nrcols++;	// horizontal
+		if(ch == '\n' || ch == EOF)			// counts number of rows until end of file
+			nrrows++;	// vertical
 	}
 	
-	//user input for start/end
+	// test print to check maze dimensions, delete later
+	printf("%d %d\n\n", nrrows, nrcols);
 	
+	// scan from input file to maze array
+	fseek(maze_f, 0, SEEK_SET);				// returns file pointer to beginning of file
+	for(i = 0; i < nrrows; i++) {
+        for(j = 0; j < nrcols; j++) {
+            fscanf(maze_f, "%c", &maze[i][j]);
+            if(maze[i][j] == '\n')			// removes any '\n' from the array
+            	j--;						
+        }
+    }
 	
-	//save good_path, store in output file
+	// test print to check if 2d array correctly stored maze, delete later
+	for(i = 0; i < nrrows; i++) {
+		for(j = 0; j < nrcols; j++)
+			printf("%c", maze[i][j]);
+		printf("\n");
+	}
 	
-	//actual code
+	// execute intelligence file
+	
+	// print actions taken into output file
 	
 	fclose(maze_f);
+	//fclose(intel_f);
+	fclose(outp_f);
 	return 0;
 }
