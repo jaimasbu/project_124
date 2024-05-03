@@ -1,4 +1,6 @@
-// stack.h
+// struct.h
+
+// define position structure
 typedef struct {
 	int x;
 	int y;

@@ -2,17 +2,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "project.h"
+#include "actions.h"
+#include "variables.h"
 
 #define MAX 100
+#define MAX_NUMBER_OF_STEPS 100
 
-int main () {
+int main() {
 	
 	// initialize files, variables, arrays
 	FILE *maze_f, *intel_f, *outp_f;
-	char maze[MAX][MAX];
 	char ch;
-	int i, j, nrrows = 0, nrcols = 0;
+	int i, j;
 	
 	// open files
 	if((maze_f = fopen("maze.txt", "r")) == NULL) {
@@ -31,7 +32,7 @@ int main () {
 	}
 
 	// scan start and end positions from input file
-
+	
 	// get dimensions of maze
 	while((ch = fgetc(maze_f)) != EOF) {
 		if(nrrows == 0 && ch != '\n')		// counts number of characters in first row
@@ -63,6 +64,8 @@ int main () {
 	// execute intelligence file
 	
 	// print actions taken into output file
+	
+	test();
 	
 	fclose(maze_f);
 	//fclose(intel_f);
