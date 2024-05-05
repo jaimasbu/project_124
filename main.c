@@ -6,7 +6,7 @@
 #include "variables.h"
 
 #define MAX 100
-#define MAX_NUMBER_OF_STEPS 100
+#define MAX_NUMBER_OF_STEPS 1000
 
 int main() {
 	
@@ -14,6 +14,8 @@ int main() {
 	FILE *maze_f, *intel_f, *outp_f;
 	char ch;
 	int i, j;
+	int com, n, t;
+	int start_x, start_y, end_x, end_y;
 	
 	// open files
 	if((maze_f = fopen("maze.txt", "r")) == NULL) {
@@ -30,24 +32,27 @@ int main() {
 		printf("output.txt cannot be opened.");
 		exit (1);
 	}
-
-	// scan start and end positions from input file
 	
-	// get dimensions of maze
+	// get start and end positions
+	fscanf(maze_f, "%d%d%d%d", &start_x, &start_y, &end_x, &end_y);
+	_initialize (start_x, start_y, end_x, end_y);
+	
+	// get maze dimensions
+	fseek(maze_f, 6, SEEK_SET);	
 	while((ch = fgetc(maze_f)) != EOF) {
-		if(nrrows == 0 && ch != '\n')		// counts number of characters in first row
-			nrcols++;	// horizontal
+		if(nrcols == 0 && ch != '\n')		// counts number of characters in first row
+			nrrows++;	// horizontal
 		if(ch == '\n' || ch == EOF)			// counts number of rows until end of file
-			nrrows++;	// vertical
+			nrcols++;	// vertical
 	}
 	
 	// test print to check maze dimensions, delete later
 	printf("%d %d\n\n", nrrows, nrcols);
 	
 	// scan from input file to maze array
-	fseek(maze_f, 0, SEEK_SET);				// returns file pointer to beginning of file
-	for(i = 0; i < nrrows; i++) {
-        for(j = 0; j < nrcols; j++) {
+	fseek(maze_f, 6, SEEK_SET);				// returns file pointer to beginning of maze
+	for(i = 0; i < nrcols; i++) {
+        for(j = 0; j < nrrows; j++) {
             fscanf(maze_f, "%c", &maze[i][j]);
             if(maze[i][j] == '\n')			// removes any '\n' from the array
             	j--;						
@@ -55,13 +60,20 @@ int main() {
     }
 	
 	// test print to check if 2d array correctly stored maze, delete later
-	for(i = 0; i < nrrows; i++) {
-		for(j = 0; j < nrcols; j++)
+	for(i = 0; i < nrcols; i++) {
+		for(j = 0; j < nrrows; j++)
 			printf("%c", maze[i][j]);
 		printf("\n");
 	}
 	
 	// execute intelligence file
+	/*j = 0;
+	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS) {
+		fscanf(intel_f, "%d %d %d", &com, &n, &t);
+		_execute(com, n, t);
+		j++;
+	}*/
+	
 	
 	// print actions taken into output file
 	

@@ -5,3 +5,5 @@
 // define global variables
 char maze[MAX][MAX];
 int nrrows, nrcols;
+int exitted;
+

@@ -55,7 +55,7 @@ position pop () {
 	position temp;
 	
 	if(!is_empty()) {
-		temp = memory[top];
+		temp = memory[top - 1];
 		top--; 
 		return temp;
 	}
@@ -68,6 +68,6 @@ position pop () {
 
 position peek () {
 	
-	return memory[top];
+	return memory[top - 1];
 	
 }

@@ -5,4 +5,5 @@
 // actions.c functions
 void initialize (position, position);
 void execute (int);
+void repeat (int* , int, int);
 void test ();
