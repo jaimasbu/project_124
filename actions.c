@@ -5,7 +5,7 @@
 #include "memory.h"
 #include "variables.h"
 
-#define MAX 100
+#define MAX 1000
 
 // the way I think we can implement this is that each action will be assigned a number by us, for example mark will be 1, move_f will be 2, etc, and that will be how we select the action in the switch statement, it will require us to
 // to write the intelligence file in numbers, but that shouldn't be too bad
@@ -13,6 +13,7 @@
 static position current, backtrack, end;
 static int x = 0, itch_F = 0, itch_B = 0, itch_L = 0, itch_R = 0;
 int i, j, count, repetitions, rep_flag, rep_size, *rep_list, *rep_pos;
+int actions[MAX];
 
 // initialize ant starting and end positions
 void _initialize (int a, int b, int c, int d) {

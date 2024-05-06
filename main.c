@@ -23,10 +23,10 @@ int main() {
 		exit (1);
 	}
 	
-	/*if((intel_f = fopen("intel.txt", "r")) == NULL) {
+	if((intel_f = fopen("intel.txt", "r")) == NULL) {
 		printf("intel.txt cannot be opened.");
 		exit (1);
-	}*/
+	}
 	
 	if((outp_f = fopen("output.txt", "w")) == NULL) {
 		printf("output.txt cannot be opened.");
@@ -35,7 +35,7 @@ int main() {
 	
 	// get start and end positions
 	fscanf(maze_f, "%d%d%d%d", &start_x, &start_y, &end_x, &end_y);
-	_initialize (start_x, start_y, end_x, end_y);
+	_initialize (start_x, start_y, end_x, end_y); //action file
 	
 	// get maze dimensions
 	fseek(maze_f, 6, SEEK_SET);	
@@ -67,20 +67,20 @@ int main() {
 	}
 	
 	// execute intelligence file
-	/*j = 0;
+	j = 0;
 	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS) {
 		fscanf(intel_f, "%d %d %d", &com, &n, &t);
 		_execute(com, n, t);
 		j++;
-	}*/
+	}
 	
-	
+	//
 	// print actions taken into output file
 	
 	test();
 	
 	fclose(maze_f);
-	//fclose(intel_f);
+	fclose(intel_f);
 	fclose(outp_f);
 	return 0;
 }

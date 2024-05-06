@@ -1,0 +1,10 @@
+repeat 5 actions for t times
+
+CWR 7 0 0
+CWB 9 0 0
+CWL 6 0 0
+CWF 8 0 0 
+
+CJFI 15 0 0 //depending on whats triggered first
+
+
