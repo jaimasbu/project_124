@@ -1,4 +1,4 @@
-//at start position
+//at start position, push into stack from the main file
 (CWR) 7 0 0
 (CWB) 9 0 0
 (CWL) 6 0 0
