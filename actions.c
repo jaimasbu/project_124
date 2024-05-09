@@ -1,3 +1,5 @@
+//Dylan, Jaima, Ray
+//ESE 124 Final Project
 // actions.c
 
 #include <stdio.h>

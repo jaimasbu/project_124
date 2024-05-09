@@ -1,3 +1,5 @@
+//Dylan, Jaima, Ray
+//ESE 124 Final Project
 // memory.c
 
 #include <stdio.h>

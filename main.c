@@ -1,4 +1,7 @@
-//Dylan 
+//Dylan, Jaima, Ray
+//ESE 124 Final Project
+
+//substring from string.h
 
 //main.c
 

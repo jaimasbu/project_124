@@ -1,3 +1,5 @@
+//Dylan, Jaima, Ray
+//ESE 124 Final Project
 // memory.h
 
 #include "struct.h"

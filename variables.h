@@ -1,3 +1,5 @@
+//Dylan, Jaima, Ray
+//ESE 124 Final Project
 // variables.h
 
 #define MAX 100
