@@ -1,10 +1,32 @@
-repeat 5 actions for t times
+//at start position
+(CWR) 7 0 0
+(CWB) 9 0 0
+(CWL) 6 0 0
+(CWF) 8 0 0 
+(CJFI) 15 0 0 //depending on whats triggered first
+(push) //gets pushed into memory, need to n
 
-CWR 7 0 0
-CWB 9 0 0
-CWL 6 0 0
-CWF 8 0 0 
+//if peek shows that next itch location mtches locatio already in memeory (visited), place pheremone
+mark
 
-CJFI 15 0 0 //depending on whats triggered first
+//keep mvoing right
+CWR
+CJFI
+push
+
+//keep moving down
+CWB
+CJFI
+push
+
+//keep moving left
+CWL
+CJFI
+push
+
+//keep moving up
+CWF
+CJFI
+push
 
 

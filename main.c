@@ -1,3 +1,5 @@
+//Dylan 
+
 //main.c
 
 #include <stdio.h>
@@ -68,19 +70,44 @@ int main() {
 	
 	// execute intelligence file
 	j = 0;
-	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS) {
+	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS) { //for repeat
 		fscanf(intel_f, "%d %d %d", &com, &n, &t);
 		_execute(com, n, t);
 		j++;
 	}
+
+	while(memory[top].x != x2 && memory[top].y != y2) //check end position against the memory stack
+		
+		//execeute lines 1-7
+		//store string in array from file
+		while(memory[top].x = a.x && memory[top].y = a.y) //current position was not in memeory stack
+		//peek at memory, check which direction he moved in, keep going in that direction
+		if(current position is right of original position)
+			move_r
+
+		if current position is down of original
+		move_b//lines 8-9
+		//peek at new position & save new position 
+
+		if current position is left of original
+		move_l
+
+		if current position is up of original	
+		move_f
 	
-	//
-	// print actions taken into output file
+		if current == stack - 1
+			break;
 	
-	test();
+		if current == stack -1
+			//execute mark lines 
+			//execute lines 1-7
+		
+		// print actions taken into output file
+		//points system maybe, counter for amount of steps taken
+		test();
 	
-	fclose(maze_f);
-	fclose(intel_f);
-	fclose(outp_f);
-	return 0;
+		fclose(maze_f);
+		fclose(intel_f);
+		fclose(outp_f);
+		return 0;
 }
