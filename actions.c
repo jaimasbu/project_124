@@ -53,38 +53,52 @@ void test () {
 // for some reason in this project x represents up and down and y represents left and right, so moving in x means moving up or down the maze's rows and moving in y means moving left or right on the maze's coloumn.
 // quite confusing for me, essentially x corresponds to rows, y corresponds to columns: maze[row][column] / maze[y][x]
 
-void _execute (char namestring[10]) {
-	
-	switch (a) {
-		
-		// MARK
-		case 'MARK': {
+void MARK(){
 			maze[current.y][current.x] = '+';		// mark ant's current position in the maze with a + representing pheromone
 			if(rep_flag == 1 && count < rep_size) {		// check if repeat function has been called, adds action to repeat array if so
 				*rep_list = 1;
 				rep_list++;
-			}
-			break;	
+			}	
 		}
-		
-		// MOVE_F
-		case 'MOVE_F': {
+
+void MOVE_F() {
 			if(maze[current.y][current.x + 1] != '*')		// check for walls
 				current.x++;								// add 1 to x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 2;
 				rep_list++;
 			}
-			break;
-		}
-		
-		// MOVE_B
-		case 'MOVE_B': {
+}
+
+void case 'MOVE_B': {
 			if(maze[current.y][current.x - 1] != '*')
 				current.x--;								// subtract 1 from x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 3;
 				rep_list++;
+			}
+		}
+
+void _execute (char namestring[10]) {
+	
+	switch (a) {
+		
+		// MARK
+		case 'MARK': {
+			_execute(MARK);
+			break;	
+		}
+		
+		// MOVE_F
+		case 'MOVE_F': {
+			_execute(MOVE_F);
+			}
+			break;
+		}
+		
+		// MOVE_B
+		case 'MOVE_B': {
+			_execute(MOVE_B);
 			}
 			break;
 		}
