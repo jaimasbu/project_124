@@ -70,7 +70,7 @@ void MOVE_F() {
 			}
 }
 
-void case 'MOVE_B': {
+void MOVE_B(){
 			if(maze[current.y][current.x - 1] != '*')
 				current.x--;								// subtract 1 from x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
@@ -78,6 +78,21 @@ void case 'MOVE_B': {
 				rep_list++;
 			}
 		}
+void MOVE_L(){
+			if(maze[current.y - 1][current.x] != '*')
+				current.y--;								// x is unchanged, subtract 1 from y
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 4;
+				rep_list++;
+			}
+		}
+void  MOVE_R() {
+			if(maze[current.y + 1][current.x] != '*')
+				current.y++;								// x is unchanged, add 1 to y
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 5;
+				rep_list++;
+			}
 
 void _execute (char namestring[10]) {
 	
@@ -92,36 +107,24 @@ void _execute (char namestring[10]) {
 		// MOVE_F
 		case 'MOVE_F': {
 			_execute(MOVE_F);
-			}
 			break;
 		}
 		
 		// MOVE_B
 		case 'MOVE_B': {
 			_execute(MOVE_B);
-			}
 			break;
 		}
 		
 		// MOVE_L
 		case 'MOVE_L': {
-			if(maze[current.y - 1][current.x] != '*')
-				current.y--;								// x is unchanged, subtract 1 from y
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 4;
-				rep_list++;
-			}
+			_execute(MOVE_L);
 			break;
 		}
 		
 		// MOVE_R
 		case 'MOVE_R': {
-			if(maze[current.y + 1][current.x] != '*')
-				current.y++;								// x is unchanged, add 1 to y
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 5;
-				rep_list++;
-			}
+			_execute(MOVE_R);
 			break;
 		}
 		
