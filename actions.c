@@ -85,6 +85,52 @@ void case 'MOVE_B': {
 			}
 		}
 
+void RP() {
+			rep_flag = 1;
+			count = 0;
+			rep_size = b;
+			repetitions = c;
+			rep_list = (int*) malloc (rep_size * sizeof(int));		// create dynamic array for actions to repeat
+			rep_pos = rep_list;										// store beginning position for array
+}
+
+void BACKTRACK() {
+			current = backtrack;		// set Michael's current position to the backtrack position
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 16;
+				rep_list++;
+			}
+}
+
+void CJPI() {
+			if(itch_F) {				// check which itch is enabled
+				current.x += 1;			// moves 1 space in the direction of the itch
+				itch_F = 0;				// disables the itch
+				x = 0;					// resets x for the next CW_ 
+			}
+			else if(itch_B) {			// same deal
+				current.x -= 1;
+				itch_B = 0;
+				x = 0;
+			}
+			else if(itch_L) {			// same deal
+				current.y -= 1;
+				itch_L = 0;
+				x = 0;
+			}
+			else if(itch_R) {			// same deal
+				current.y += 1;
+				itch_R = 0;
+				x = 0;
+			}
+			else {						// if no itch, do nothing
+			}
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 15;
+				rep_list++;
+			}
+}
+
 void _execute (char namestring[10]) {
 	
 	switch (a) {
@@ -281,42 +327,13 @@ void _execute (char namestring[10]) {
 		
 		// CJPI
 		case 'CJPI': {
-			if(itch_F) {				// check which itch is enabled
-				current.x += 1;			// moves 1 space in the direction of the itch
-				itch_F = 0;				// disables the itch
-				x = 0;					// resets x for the next CW_ 
-			}
-			else if(itch_B) {			// same deal
-				current.x -= 1;
-				itch_B = 0;
-				x = 0;
-			}
-			else if(itch_L) {			// same deal
-				current.y -= 1;
-				itch_L = 0;
-				x = 0;
-			}
-			else if(itch_R) {			// same deal
-				current.y += 1;
-				itch_R = 0;
-				x = 0;
-			}
-			else {						// if no itch, do nothing
-			}
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 15;
-				rep_list++;
-			}
+			_execute(CJPI);
 			break;
 		}
 		
 		// BACKTRACK
 		case 'BACKTRACK': {
-			current = backtrack;		// set Michael's current position to the backtrack position
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 16;
-				rep_list++;
-			}
+			_execute(BACKTRACK);
 			break;
 		}
 		
