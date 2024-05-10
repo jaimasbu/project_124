@@ -5,28 +5,3 @@
 (CWF) 8 0 0 
 (CJFI) 15 0 0 //depending on whats triggered first
 (push) 10 0 0//gets pushed into memory, need to n
-
-//if peek shows that next itch location mtches locatio already in memeory (visited), place pheremone
-mark 1 0 0
-
-//keep mvoing right
-CWR 7 0 0
-CJFI 15 0 0
-push 10 0 0
-
-//keep moving down
-CWB 9 0 0
-CJFI 15 0 0
-push 10 0 0
-
-//keep moving left
-CWL 6 0 0
-CJFI 15 0 0
-push 10 0 0
-
-//keep moving up
-CWF 8 0 0
-CJFI 15 0 0
-push 10 0 0
-
-
