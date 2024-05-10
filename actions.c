@@ -64,28 +64,47 @@ void _execute (char namestring[10]) {
 			if(rep_flag == 1 && count < rep_size) {		// check if repeat function has been called, adds action to repeat array if so
 				*rep_list = 1;
 				rep_list++;
-			}
-			break;	
+			}	
 		}
-		
-		// MOVE_F
-		case 'MOVE_F': {
+
+void MOVE_F() {
 			if(maze[current.y][current.x + 1] != '*')		// check for walls
 				current.x++;								// add 1 to x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 2;
 				rep_list++;
 			}
-			break;
-		}
-		
-		// MOVE_B
-		case 'MOVE_B': {
+}
+
+void case 'MOVE_B': {
 			if(maze[current.y][current.x - 1] != '*')
 				current.x--;								// subtract 1 from x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 3;
 				rep_list++;
+			}
+		}
+
+void _execute (char namestring[10]) {
+	
+	switch (a) {
+		
+		// MARK
+		case 'MARK': {
+			_execute(MARK);
+			break;	
+		}
+		
+		// MOVE_F
+		case 'MOVE_F': {
+			_execute(MOVE_F);
+			}
+			break;
+		}
+		
+		// MOVE_B
+		case 'MOVE_B': {
+			_execute(MOVE_B);
 			}
 			break;
 		}

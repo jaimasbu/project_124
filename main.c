@@ -1,7 +1,5 @@
 //Dylan, Jaima, Ray
 //ESE 124 Final Project
-//substring from string.h??
-
 //main.c
 
 #include <stdio.h>
@@ -9,16 +7,16 @@
 #include <stdlib.h>
 #include "actions.h"
 #include "variables.h"
+#include "memory.h"
 
 #define MAX 100
 #define MAX_NUMBER_OF_STEPS 1000
 
 int main() {
-	
 	// initialize files, variables, arrays
 	FILE *maze_f, *intel_f, *outp_f;
 	char ch;
-	int i, j;
+	int i, j, k;
 	int com, n, t;
 	int start_x, start_y, end_x, end_y;
 	
@@ -42,17 +40,17 @@ int main() {
 	fscanf(maze_f, "%d%d%d%d", &start_x, &start_y, &end_x, &end_y);
 	_initialize (start_x, start_y, end_x, end_y); //action file
 	
-	Printf("Start row:");
-	scanf("%d", &start_x);
+	// Printf("Start row:");
+	// scanf("%d", &start_x);
 
-	Printf("Start col:");
-	scanf("%d", &start_y);
+	// Printf("Start col:");
+	// scanf("%d", &start_y);
 
-	Printf("END row:");
-	scanf("%d", &end_x);
+	// Printf("END row:");
+	// scanf("%d", &end_x);
 
-	Printf("END col:");
-	scanf("%d", &end_y);
+	// Printf("END col:");
+	// scanf("%d", &end_y);
 
 	// get maze dimensions
 	fseek(maze_f, 6, SEEK_SET);	
@@ -65,7 +63,6 @@ int main() {
 	//  int x_amt=0;
 	//  if nrrow>nrcol,
 	//  x_amt=nrrow;
-
 
 	// test print to check maze dimensions, delete later
 	printf("%d %d\n\n", nrrows, nrcols);
@@ -147,76 +144,84 @@ int main() {
     //             fprintf(stderr, "Error: Invalid order found in intelligent file.\n");
     //             exit(EXIT_FAILURE);
 
-				char com[10]
-				while(!= (start_x== end_x && start_y !=end_y && K!=MAX_NUMBER_OF_STEPS))
-				{
-					fgets(com, 10, intel_f);
-					if(strcmp(com, "MOVE_R") == 0) {
-							//move_f
-							//MOVE_R(Maze);
-						_execute (MOVE_R); 
-						printf("move right executed.\n");
-						k++;
-					}
-					else if(strcmp(com, "MOVE_B") == 0){
-						_execute (MOVE_B); 
-						printf("move down executed.\n");
-						k++;
-					}
-					else if(strcmp(com,"MOVE_L") == 0){
-						//MOVE_L(Maze);
-						_execute (MOVE_L); 
-						printf("move left executed.\n");
-						k++;
-					}
-					else if(strcmp(com,"MOVE_F") == 0){
-						//MOVE_F(Maze);
-						_execute (MOVE_F); 
-						printf("move front executed.\n");
-						k++;
-					}
-					else if(strcmp(com, "CWR") == 0) {
-						//CWR(Maze)
-						_execute (CWR); 
-						printf("feel itch to right.\n");
-						k++;
-					}
-					else if(strcmp(com, "CWB") == 0) {
-						//CWB(Maze);
-						_execute (CWB); 
-						printf("feel itch to down.\n");
-						k++;
-					}
-					else if(strcmp(com, "CWL") == 0) {
-						//CWL(Maze);
-						_execute (CWL); 
-						printf("feel itch to left.\n");
-						k++;
-					}
-					else if(strcmp(com, "CWF") == 0) {
-						//CWF(Maze);
-						_execute (CWF); 
-						printf("feel itch to front.\n");
-						k++;
-					}
-					else if(strcmp(com,"CJPI")==0){
-						_execute (CWF); 
-						printf("jump towards previous itch.\n");
-						k++;
-					}
+	char com[10];
+	while (!(start_x == end_x && start_y != end_y && k != MAX_NUMBER_OF_STEPS)){
+		fgets(com, 10, intel_f);
+		if(strcmp(com, "MOVE_R") == 0) {
+			//MOVE_R(Maze);
+			_execute (MOVE_R); 
+			printf("move right executed.\n");
+			k++;
+		}
+		else if(strcmp(com, "MOVE_B") == 0){
+			_execute (MOVE_B); 
+			printf("move down executed.\n");
+			k++;
+		}
+		else if(strcmp(com,"MOVE_L") == 0){
+			//MOVE_L(Maze);
+			_execute (MOVE_L); 
+			printf("move left executed.\n");
+			k++;
+		}
+		else if(strcmp(com,"MOVE_F") == 0){
+			//MOVE_F(Maze);
+			_execute (MOVE_F); 
+			printf("move front executed.\n");
+			k++;
+		}
+		else if(strcmp(com, "CWR") == 0) {
+			//CWR(Maze)
+			_execute (CWR); 
+			printf("feel itch to right.\n");
+			k++;
+		}
+		else if(strcmp(com, "CWB") == 0) {
+			//CWB(Maze);
+			_execute (CWB); 
+			printf("feel itch to down.\n");
+			k++;
+		}
+		else if(strcmp(com, "CWL") == 0) {
+			//CWL(Maze);
+			_execute (CWL); 
+			printf("feel itch to left.\n");
+			k++;
+		}
+		else if(strcmp(com, "CWF") == 0) {
+			//CWF(Maze);
+			_execute (CWF); 
+			printf("feel itch to front.\n");
+			k++;
+		}
+		else if(strcmp(com,"CJPI")==0){
+			_execute (CJPI); 
+			printf("jump towards previous itch.\n");
+			k++;
+			//if jump is performed, push new place into memory
+			_execute(PUSH);
+		}
+		//pheremone
+		memory[top].x = a.x;
+		memory[top].y = a.y;
+		if(a.x==memory[top-2].x && a.y==memory[top-2]){
+			_execute(MARK);
+			printf("pheremone was placed.\n");
+		}
 
-				}//check infront of the wall 
-				printf("number of moves made %d", k); //moves made
+	}//check infront of the wall 
 
-				int gdeeds=0; //total good deeds
-				int gds=0; //current good deed
-				if(maze[i][j] > '0' && maze[i][j] <= '9'){
-					gds = maze[i][j];
-					gdeeds += gds;
-				}
-				printf("Good Deeds: %d", gdeeds);
+	printf("number of moves made %d", k); //moves made
 
-				
+	int gdeeds=0; //total good deeds
+	int gds=0; //current good deed
+	if(maze[i][j] > '0' && maze[i][j] <= '9'){
+		gds = maze[i][j];
+		gdeeds += gds;
+	}
+	printf("Good Deeds: %d", gdeeds);
+
+
 	fclose(maze_f);
 	fclose(intel_f);
 	fclose(outp_f);
@@ -224,12 +229,11 @@ int main() {
 
 }
 
-fgets(
+//fgets(
 	//string compare to ee which case 
 
 	//on top of number, get row n column and reads as good deed value and is stored to total good deeds, 
 	//after its done moving but before doing next move, -'0'
-)
 
 //while not max steps
 //read line from inetlligence file
