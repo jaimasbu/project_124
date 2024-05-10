@@ -53,6 +53,7 @@ void test () {
 // for some reason in this project x represents up and down and y represents left and right, so moving in x means moving up or down the maze's rows and moving in y means moving left or right on the maze's coloumn.
 // quite confusing for me, essentially x corresponds to rows, y corresponds to columns: maze[row][column] / maze[y][x]
 
+
 void _execute (char namestring[10]) {
 	
 	switch (a) {
@@ -302,12 +303,7 @@ void _execute (char namestring[10]) {
 		
 		// RP
 		case 'RP': {
-			rep_flag = 1;
-			count = 0;
-			rep_size = b;
-			repetitions = c;
-			rep_list = (int*) malloc (rep_size * sizeof(int));		// create dynamic array for actions to repeat
-			rep_pos = rep_list;										// store beginning position for array
+			_execute(RP);									// store beginning position for array
 			break;
 		}
 		
