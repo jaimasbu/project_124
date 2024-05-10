@@ -37,7 +37,6 @@ void _initialize (int a, int b, int c, int d) {
 void repeat(int *list, int n, int t);
 
 void test () {
-	
 	printf("\nactions.c\n");
 	printf("%d %d\n\n", nrrows, nrcols);
 	
@@ -54,12 +53,12 @@ void test () {
 // for some reason in this project x represents up and down and y represents left and right, so moving in x means moving up or down the maze's rows and moving in y means moving left or right on the maze's coloumn.
 // quite confusing for me, essentially x corresponds to rows, y corresponds to columns: maze[row][column] / maze[y][x]
 
-void _execute (int a, int b, int c) {
+void _execute (char namestring[10]) {
 	
 	switch (a) {
 		
 		// MARK
-		case 1: {
+		case 'MARK': {
 			maze[current.y][current.x] = '+';		// mark ant's current position in the maze with a + representing pheromone
 			if(rep_flag == 1 && count < rep_size) {		// check if repeat function has been called, adds action to repeat array if so
 				*rep_list = 1;
@@ -69,7 +68,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// MOVE_F
-		case 2: {
+		case 'MOVE_F': {
 			if(maze[current.y][current.x + 1] != '*')		// check for walls
 				current.x++;								// add 1 to x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
@@ -80,7 +79,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// MOVE_B
-		case 3: {
+		case 'MOVE_B': {
 			if(maze[current.y][current.x - 1] != '*')
 				current.x--;								// subtract 1 from x, y is unchanged
 			if(rep_flag == 1 && count < rep_size) {		
@@ -91,7 +90,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// MOVE_L
-		case 4: {
+		case 'MOVE_L': {
 			if(maze[current.y - 1][current.x] != '*')
 				current.y--;								// x is unchanged, subtract 1 from y
 			if(rep_flag == 1 && count < rep_size) {		
@@ -102,7 +101,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// MOVE_R
-		case 5: {
+		case 'MOVE_R': {
 			if(maze[current.y + 1][current.x] != '*')
 				current.y++;								// x is unchanged, add 1 to y
 			if(rep_flag == 1 && count < rep_size) {		
@@ -113,7 +112,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// CWL
-		case 6: {
+		case 'CWL': {
 			i = 0;
 			itch_L = 1; 
 			while(maze[current.y - i][current.x] != '*') {		// checks positions to the left of the ant
@@ -132,7 +131,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// CWR
-		case 7: {
+		case 'CWR': {
 			i = 0;
 			itch_R = 1; 
 			while(maze[current.y + i][current.x] != '*') {		// same deal as CWL
@@ -151,7 +150,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// CWF
-		case 8: {
+		case 'CWF': {
 			i = 0;
 			itch_F = 1; 
 			while(maze[current.y][current.x + 1] != '*') {		// same deal as CWL
@@ -170,7 +169,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// CWB
-		case 9: {
+		case 'CWB': {
 			i = 0;
 			itch_B = 1; 
 			while(maze[current.y][current.x - i] != '*') {		// same deal as CWL
@@ -190,7 +189,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// PUSH
-		case 10: {
+		case 'PUSH': {
 			push(current);
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 10;
@@ -200,7 +199,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// POP
-		case 11: {
+		case 'POP': {
 			backtrack = pop();			// retrieve coords from top of memory
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 11;
@@ -210,7 +209,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// PEEK
-		case 12: {
+		case 'PEEK': {
 			backtrack = peek();			// retrieve coords from top of memory
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 12;
@@ -220,7 +219,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// CLEAR
-		case 13: {
+		case 'CLEAR': {
 			clear();
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 13;
@@ -230,7 +229,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// BJPI
-		case 14: {
+		case 'BJPI': {
 			if(itch_F) {				// check which itch is enabled
 				current.x += x;			// moves x spaces in the direction of the itch
 				itch_F = 0;				// disables the itch
@@ -261,7 +260,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// CJPI
-		case 15: {
+		case 'CJPI': {
 			if(itch_F) {				// check which itch is enabled
 				current.x += 1;			// moves 1 space in the direction of the itch
 				itch_F = 0;				// disables the itch
@@ -292,7 +291,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// BACKTRACK
-		case 16: {
+		case 'BACKTRACK': {
 			current = backtrack;		// set Michael's current position to the backtrack position
 			if(rep_flag == 1 && count < rep_size) {		
 				*rep_list = 16;
@@ -302,7 +301,7 @@ void _execute (int a, int b, int c) {
 		}
 		
 		// RP
-		case 17: {
+		case 'RP': {
 			rep_flag = 1;
 			count = 0;
 			rep_size = b;
