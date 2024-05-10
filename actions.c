@@ -53,7 +53,13 @@ void test () {
 // for some reason in this project x represents up and down and y represents left and right, so moving in x means moving up or down the maze's rows and moving in y means moving left or right on the maze's coloumn.
 // quite confusing for me, essentially x corresponds to rows, y corresponds to columns: maze[row][column] / maze[y][x]
 
-void MARK(){
+
+void _execute (char namestring[10]) {
+	
+	switch (a) {
+		
+		// MARK
+		case 'MARK': {
 			maze[current.y][current.x] = '+';		// mark ant's current position in the maze with a + representing pheromone
 			if(rep_flag == 1 && count < rep_size) {		// check if repeat function has been called, adds action to repeat array if so
 				*rep_list = 1;
@@ -93,6 +99,52 @@ void  MOVE_R() {
 				*rep_list = 5;
 				rep_list++;
 			}
+
+void RP() {
+			rep_flag = 1;
+			count = 0;
+			rep_size = b;
+			repetitions = c;
+			rep_list = (int*) malloc (rep_size * sizeof(int));		// create dynamic array for actions to repeat
+			rep_pos = rep_list;										// store beginning position for array
+}
+
+void BACKTRACK() {
+			current = backtrack;		// set Michael's current position to the backtrack position
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 16;
+				rep_list++;
+			}
+}
+
+void CJPI() {
+			if(itch_F) {				// check which itch is enabled
+				current.x += 1;			// moves 1 space in the direction of the itch
+				itch_F = 0;				// disables the itch
+				x = 0;					// resets x for the next CW_ 
+			}
+			else if(itch_B) {			// same deal
+				current.x -= 1;
+				itch_B = 0;
+				x = 0;
+			}
+			else if(itch_L) {			// same deal
+				current.y -= 1;
+				itch_L = 0;
+				x = 0;
+			}
+			else if(itch_R) {			// same deal
+				current.y += 1;
+				itch_R = 0;
+				x = 0;
+			}
+			else {						// if no itch, do nothing
+			}
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 15;
+				rep_list++;
+			}
+}
 
 void _execute (char namestring[10]) {
 	
@@ -278,53 +330,19 @@ void _execute (char namestring[10]) {
 		
 		// CJPI
 		case 'CJPI': {
-			if(itch_F) {				// check which itch is enabled
-				current.x += 1;			// moves 1 space in the direction of the itch
-				itch_F = 0;				// disables the itch
-				x = 0;					// resets x for the next CW_ 
-			}
-			else if(itch_B) {			// same deal
-				current.x -= 1;
-				itch_B = 0;
-				x = 0;
-			}
-			else if(itch_L) {			// same deal
-				current.y -= 1;
-				itch_L = 0;
-				x = 0;
-			}
-			else if(itch_R) {			// same deal
-				current.y += 1;
-				itch_R = 0;
-				x = 0;
-			}
-			else {						// if no itch, do nothing
-			}
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 15;
-				rep_list++;
-			}
+			_execute(CJPI);
 			break;
 		}
 		
 		// BACKTRACK
 		case 'BACKTRACK': {
-			current = backtrack;		// set Michael's current position to the backtrack position
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 16;
-				rep_list++;
-			}
+			_execute(BACKTRACK);
 			break;
 		}
 		
 		// RP
 		case 'RP': {
-			rep_flag = 1;
-			count = 0;
-			rep_size = b;
-			repetitions = c;
-			rep_list = (int*) malloc (rep_size * sizeof(int));		// create dynamic array for actions to repeat
-			rep_pos = rep_list;										// store beginning position for array
+			_execute(RP);									// store beginning position for array
 			break;
 		}
 		

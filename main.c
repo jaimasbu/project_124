@@ -85,7 +85,6 @@ int main() {
 	}
 	
 	// execute intelligence file
-<<<<<<< HEAD
 	j = 0;
 	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS && //!=EOF) { //for repeat
 		fscanf(intel_f, "%d %d %d", &com, &n, &t);
@@ -93,14 +92,6 @@ int main() {
 		j++;
 	}
 //check for eof 
-=======
-	// j = 0;
-	// // while(exitted == 0 && j < MAX_NUMBER_OF_STEPS) { //for repeat
-	// // 	fscanf(intel_f, "%d %d %d", &com, &n, &t);
-	// // 	_execute(com, n, t);
-	// // 	j++;
-	// // }
->>>>>>> e957b02b5ed9fe620099854643aa3c334f527b13
 
 	 //while(memory[top].x != x2 && memory[top].y != y2) //check end position against the memory stack
 	// 	//execeute lines 1-7
