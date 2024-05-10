@@ -72,11 +72,12 @@ int main() {
 	
 	// execute intelligence file
 	j = 0;
-	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS) { //for repeat
+	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS && //!=EOF) { //for repeat
 		fscanf(intel_f, "%d %d %d", &com, &n, &t);
 		_execute(com, n, t);
 		j++;
 	}
+//check for eof 
 
 	while(memory[top].x != x2 && memory[top].y != y2) //check end position against the memory stack
 		
