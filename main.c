@@ -222,3 +222,14 @@ int main() {
 	return 0;
 
 }
+
+fgets(
+	//string compare to ee which case 
+
+	//on top of number, get row n column and reads as good deed value and is stored to total good deeds, 
+	//after its done moving but before doing next move, -'0'
+)
+
+//while not max steps
+//read line from inetlligence file
+//comapres it to the function, excecute move_f(maze)
