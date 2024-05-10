@@ -146,6 +146,131 @@ void CJPI() {
 			}
 }
 
+void CWL() {
+			i = 0;
+			itch_L = 1; 
+			while(maze[current.y - i][current.x] != '*') {		// checks positions to the left of the ant
+				if(maze[current.y - i][current.x] == '+')		// checks if any positions to the left of the ant is marked, if so then itch flag is set to 0
+					itch_L = 0;
+				x++;											// number of spaces until it reaches a wall
+				i++;
+			}
+			if(x == 0)
+				itch_L = 0;
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 6;
+				rep_list++;
+			}
+		}
+void CWR() {
+			i = 0;
+			itch_R = 1; 
+			while(maze[current.y + i][current.x] != '*') {		// same deal as CWL
+				if(maze[current.y + i][current.x] == '+')
+					itch_R = 0;
+				x++;
+				i++;
+			}
+			if(x == 0)
+				itch_R = 0;
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 7;
+				rep_list++;
+			}
+		}
+void CWF() {
+			i = 0;
+			itch_F = 1; 
+			while(maze[current.y][current.x + 1] != '*') {		// same deal as CWL
+				if(maze[current.y][current.x + 1] == '+')
+					itch_F = 0;
+				x++; 
+				i++;
+			}
+			if(x == 0)
+				itch_F = 0;
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 8;
+				rep_list++;
+			}
+		}
+void CWB() {
+			i = 0;
+			itch_B = 1; 
+			while(maze[current.y][current.x - i] != '*') {		// same deal as CWL
+				if(maze[current.y][current.x - i] == '+')
+					itch_B = 0;
+				x++;
+				
+				i++;
+			}
+			if(x == 0)
+				itch_B = 0;
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 9;
+				rep_list++;
+			}
+		}
+void PUSH() {
+			push(current);
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 10;
+				rep_list++;
+			}
+		}
+void POP() {
+			backtrack = pop();			// retrieve coords from top of memory
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 11;
+				rep_list++;
+			}
+		}
+
+void CLEAR(){
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 13;
+				rep_list++;
+			}
+}
+
+void BJPI(){
+			if(itch_F) {				// check which itch is enabled
+				current.x += x;			// moves x spaces in the direction of the itch
+				itch_F = 0;				// disables the itch
+				x = 0;					// resets x for the next CW_ 
+			}
+			else if(itch_B) {			// same deal
+				current.x -= x;
+				itch_B = 0;
+				x = 0;
+			}
+			else if(itch_L) {			// same deal
+				current.y -= x;
+				itch_L = 0;
+				x = 0;
+			}
+			else if(itch_R) {			// same deal
+				current.y += x;
+				itch_R = 0;
+				x = 0;
+			}
+			else {						// if no itch, do nothing
+			}
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 14;
+				rep_list++;
+			}
+			break;
+		}
+
+void PEEK() {
+			backtrack = peek();			// retrieve coords from top of memory
+			if(rep_flag == 1 && count < rep_size) {		
+				*rep_list = 12;
+				rep_list++;
+			}
+		}
+
 void _execute (char namestring[10]) {
 	
 	switch (a) {
@@ -182,149 +307,55 @@ void _execute (char namestring[10]) {
 		
 		// CWL
 		case 'CWL': {
-			i = 0;
-			itch_L = 1; 
-			while(maze[current.y - i][current.x] != '*') {		// checks positions to the left of the ant
-				if(maze[current.y - i][current.x] == '+')		// checks if any positions to the left of the ant is marked, if so then itch flag is set to 0
-					itch_L = 0;
-				x++;											// number of spaces until it reaches a wall
-				i++;
-			}
-			if(x == 0)
-				itch_L = 0;
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 6;
-				rep_list++;
-			}
+			_execute(CWL);
 			break;
 		}
 		
 		// CWR
 		case 'CWR': {
-			i = 0;
-			itch_R = 1; 
-			while(maze[current.y + i][current.x] != '*') {		// same deal as CWL
-				if(maze[current.y + i][current.x] == '+')
-					itch_R = 0;
-				x++;
-				i++;
-			}
-			if(x == 0)
-				itch_R = 0;
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 7;
-				rep_list++;
-			}
+			_execute(CWR);
 			break;
 		}
 		
 		// CWF
 		case 'CWF': {
-			i = 0;
-			itch_F = 1; 
-			while(maze[current.y][current.x + 1] != '*') {		// same deal as CWL
-				if(maze[current.y][current.x + 1] == '+')
-					itch_F = 0;
-				x++; 
-				i++;
-			}
-			if(x == 0)
-				itch_F = 0;
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 8;
-				rep_list++;
-			}
+			_execute(CWF);
 			break;
 		}
 		
 		// CWB
 		case 'CWB': {
-			i = 0;
-			itch_B = 1; 
-			while(maze[current.y][current.x - i] != '*') {		// same deal as CWL
-				if(maze[current.y][current.x - i] == '+')
-					itch_B = 0;
-				x++;
-				
-				i++;
-			}
-			if(x == 0)
-				itch_B = 0;
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 9;
-				rep_list++;
-			}
+			_execute(CWB);
 			break;
 		}
 		
 		// PUSH
 		case 'PUSH': {
-			push(current);
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 10;
-				rep_list++;
-			}
+			_execute(PUSH);
 			break;
 		}
 		
 		// POP
 		case 'POP': {
-			backtrack = pop();			// retrieve coords from top of memory
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 11;
-				rep_list++;
-			}
+			_execute(pop);
 			break;
 		}
 		
 		// PEEK
 		case 'PEEK': {
-			backtrack = peek();			// retrieve coords from top of memory
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 12;
-				rep_list++;
-			}
+			_execute(PEEK);
 			break;
 		}
 		
 		// CLEAR
 		case 'CLEAR': {
-			clear();
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 13;
-				rep_list++;
-			}
+			_execute(CLEAR);
 			break;
 		}
 		
 		// BJPI
 		case 'BJPI': {
-			if(itch_F) {				// check which itch is enabled
-				current.x += x;			// moves x spaces in the direction of the itch
-				itch_F = 0;				// disables the itch
-				x = 0;					// resets x for the next CW_ 
-			}
-			else if(itch_B) {			// same deal
-				current.x -= x;
-				itch_B = 0;
-				x = 0;
-			}
-			else if(itch_L) {			// same deal
-				current.y -= x;
-				itch_L = 0;
-				x = 0;
-			}
-			else if(itch_R) {			// same deal
-				current.y += x;
-				itch_R = 0;
-				x = 0;
-			}
-			else {						// if no itch, do nothing
-			}
-			if(rep_flag == 1 && count < rep_size) {		
-				*rep_list = 14;
-				rep_list++;
-			}
+			_execute(BJPI);
 			break;
 		}
 		

@@ -17,7 +17,7 @@ int main() {
 	FILE *maze_f, *intel_f, *outp_f;
 	char ch;
 	int i, j, k;
-	int com, n, t;
+	int n, t;
 	int start_x, start_y, end_x, end_y;
 	
 	// open files
@@ -86,7 +86,7 @@ int main() {
 	
 	// execute intelligence file
 	j = 0;
-	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS && //!=EOF) { //for repeat
+	while(exitted == 0 && j < MAX_NUMBER_OF_STEPS && ((fscanf(intel_f, "%d %d %d", &com, &n, &t))!=EOF )) { //for repeat
 		fscanf(intel_f, "%d %d %d", &com, &n, &t);
 		_execute(com, n, t);
 		j++;
@@ -202,9 +202,7 @@ int main() {
 			_execute(PUSH);
 		}
 		//pheremone
-		memory[top].x = a.x;
-		memory[top].y = a.y;
-		if(a.x==memory[top-2].x && a.y==memory[top-2]){
+		if(memory[top].x==memory[top-2].x && memory[top].y==memory[top-2]){ //checks whether a position was visited twice to place a pheremone
 			_execute(MARK);
 			printf("pheremone was placed.\n");
 		}
