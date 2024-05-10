@@ -1,7 +1,15 @@
+<<<<<<< HEAD
+//at start position, initialized in main
+=======
 //at start position, push into stack from the main file
+>>>>>>> 82dd1ada6593d7ae804917dc2a44d9e0b45471bd
 (CWR) 7 0 0
 (CWB) 9 0 0
 (CWL) 6 0 0
 (CWF) 8 0 0 
+<<<<<<< HEAD
+(CJPI) 15 0 0 //depending on whats triggered first
+=======
 (CJFI) 15 0 0 //depending on whats triggered first
+>>>>>>> 82dd1ada6593d7ae804917dc2a44d9e0b45471bd
 (push) 10 0 0//gets pushed into memory, need to n
